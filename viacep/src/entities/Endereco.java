@@ -2,7 +2,7 @@ package entities;
 
 import java.util.Objects;
 
-public class Cidade {
+public class Endereco {
 	
 	private Integer id;
 	private String cep;
@@ -16,10 +16,10 @@ public class Cidade {
 	private String ddd;
 	private String siafi;
 	
-	public Cidade() {
+	public Endereco() {
 	}
 
-	public Cidade(Integer id, String cep, String logradouro, String complemento, String bairro, String localidade,
+	public Endereco(Integer id, String cep, String logradouro, String complemento, String bairro, String localidade,
 			String uf, String ibge, String gia, String ddd, String siafi) {
 		this.id = id;
 		this.cep = cep;
@@ -135,7 +135,7 @@ public class Cidade {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cidade other = (Cidade) obj;
+		Endereco other = (Endereco) obj;
 		return Objects.equals(bairro, other.bairro) && Objects.equals(cep, other.cep)
 				&& Objects.equals(complemento, other.complemento) && Objects.equals(ddd, other.ddd)
 				&& Objects.equals(gia, other.gia) && Objects.equals(ibge, other.ibge) && Objects.equals(id, other.id)
