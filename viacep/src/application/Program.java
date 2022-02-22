@@ -14,11 +14,15 @@ public class Program {
 		
 		CepDao cepDao = DaoFactory.criaCepDao();
 		
-		//Cep cep = ViaCepClient.findCep("13382440");
-		
+		System.out.println("--- Teste #1: Cep insert ---");
+		Cep novoCep = ViaCepClient.findCep("08375000");
+		cepDao.insert(novoCep);
+		System.out.println("\nInserido! Novo Cep: " + novoCep.getCep());
+	
+		System.out.println("\n--- Teste #2: Cep findAll ---");
 		List<Cep> list = cepDao.findAll();
 		for (Cep listaCep : list) {
 			System.out.println(listaCep);
-		}
+		}		
 	}
 }

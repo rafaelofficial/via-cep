@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,42 @@ public class CepDaoJdbc implements CepDao {
 
 	@Override
 	public void insert(Cep obj) {
-		// TODO Auto-generated method stub
+
+		PreparedStatement statement = null;
+		
+		try {
+			
+			statement = conn.prepareStatement(
+					"INSERT INTO tb_cidade (Cep, Logradouro, Bairro, Localidade, Uf, Ibge, Gia, Ddd, siafi) \r\n"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			
+			// configurar os placeholder
+			statement.setString(1, obj.getCep());
+			statement.setString(2, obj.getLogradouro());
+			statement.setString(3, obj.getBairro());
+			statement.setString(4, obj.getLocalidade());
+			statement.setString(5, obj.getUf());
+			statement.setString(6, obj.getIbge());
+			statement.setString(7, obj.getGia());
+			statement.setString(8, obj.getDdd());
+			statement.setString(9, obj.getSiafi());
+			
+			int linhasAfetadas = statement.executeUpdate();
+			if (linhasAfetadas > 0) {
+				ResultSet resultSet = statement.getGeneratedKeys();
+				if (resultSet.next()) {
+					int id = resultSet.getInt(1);
+					statement.setInt(linhasAfetadas, id);
+				}
+				DB.closeResultSet(resultSet);
+			}
+			
+		} catch (SQLException e) {
+			throw new DbException("Erro não esperado! Nenhuma linha afetada!");
+		} finally {
+			DB.closeStatement(statement);
+		}
+		
 		
 	}
 
@@ -42,24 +78,26 @@ public class CepDaoJdbc implements CepDao {
 			resultSet = statement.executeQuery();
 			
 			List<Cep> list = new ArrayList<>();
-			Map<Integer, Cep> map = new HashMap();
+			Map<Integer, Cep> map = new HashMap<Integer, Cep>();
 			
 			// testa se veio algum resultado
 			while (resultSet.next()) {
-				Cep cepMap = map.get(resultSet.getInt("Id"));
-				if (cepMap == null) {
-					Cep cep = instaciarCep(resultSet);
-					list.add(cep);
+				Cep cep = map.get(resultSet.getInt("Id"));
+				
+				if (cep == null) {
+					cep = instaciarCep(resultSet);
+					map.put(resultSet.getInt("Id"), cep);
 				}
-				return list;
+				list.add(cep);
 			}	
+			return list;
+			
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		} finally {
 			DB.closeStatement(statement);
 			DB.closeResultSet(resultSet);
-		}	
-		return null;
+		}
 	}
 
 	private Cep instaciarCep(ResultSet resultSet) throws SQLException {
