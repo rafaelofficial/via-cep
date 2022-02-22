@@ -48,18 +48,7 @@ public class CepDaoJdbc implements CepDao {
 			while (resultSet.next()) {
 				Cep cepMap = map.get(resultSet.getInt("Id"));
 				if (cepMap == null) {
-					Cep cep = new Cep();
-					cep.setCep(resultSet.getString("Cep"));
-					cep.setLogradouro(resultSet.getString("Logradouro"));
-					cep.setComplemento(resultSet.getString("Complemento"));
-					cep.setBairro(resultSet.getString("Bairro"));
-					cep.setLocalidade(resultSet.getString("Localidade"));
-					cep.setUf(resultSet.getString("Uf"));
-					cep.setIbge(resultSet.getString("Ibge"));
-					cep.setGia(resultSet.getString("Gia"));
-					cep.setDdd(resultSet.getString("Ddd"));
-					cep.setSiafi(resultSet.getString("siafi"));
-					
+					Cep cep = instaciarCep(resultSet);
 					list.add(cep);
 				}
 				return list;
@@ -71,5 +60,20 @@ public class CepDaoJdbc implements CepDao {
 			DB.closeResultSet(resultSet);
 		}	
 		return null;
+	}
+
+	private Cep instaciarCep(ResultSet resultSet) throws SQLException {
+		Cep cep = new Cep();
+		cep.setCep(resultSet.getString("Cep"));
+		cep.setLogradouro(resultSet.getString("Logradouro"));
+		cep.setComplemento(resultSet.getString("Complemento"));
+		cep.setBairro(resultSet.getString("Bairro"));
+		cep.setLocalidade(resultSet.getString("Localidade"));
+		cep.setUf(resultSet.getString("Uf"));
+		cep.setIbge(resultSet.getString("Ibge"));
+		cep.setGia(resultSet.getString("Gia"));
+		cep.setDdd(resultSet.getString("Ddd"));
+		cep.setSiafi(resultSet.getString("siafi"));
+		return cep;
 	}
 }
