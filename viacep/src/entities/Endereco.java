@@ -145,7 +145,7 @@ public class Endereco {
 
 	@Override
 	public String toString() {
-		return "Cidade [id=" + id + ", cep=" + cep + ", logradouro=" + logradouro + ", complemento=" + complemento
+		return "Endereco [id=" + id + ", cep=" + cep + ", logradouro=" + logradouro + ", complemento=" + complemento
 				+ ", bairro=" + bairro + ", localidade=" + localidade + ", uf=" + uf + ", ibge=" + ibge + ", gia=" + gia
 				+ ", ddd=" + ddd + ", siafi=" + siafi + "]";
 	}
