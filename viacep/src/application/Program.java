@@ -19,11 +19,11 @@ public class Program {
 		CepDao cepDao = DaoFactory.criaCepDao();
 		EnvioEmailService service = new EnvioEmailService();
 		
-		System.out.print("Informe um CEP válido: ");
+		System.out.print("\nInforme um CEP válido: ");
 		String cep = sc.nextLine();
 		Cep novoCep = ViaCepClient.findCep(cep);
 				
-		System.out.println("--- Teste #1: Cep insert ---");
+		System.out.println("\n--- Teste #1: Cep insert ---");
 		cepDao.insert(novoCep);
 		System.out.println("\nInserido! Novo Cep: " + novoCep.getCep());
 	

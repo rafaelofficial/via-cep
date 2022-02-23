@@ -34,7 +34,6 @@ public class CepDaoJdbc implements CepDao {
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
 			configuraPlaceholderInsert(obj, statement);
-			
 			totalDeLinhasAfetadas(statement);
 			
 		} catch (SQLException e) {
