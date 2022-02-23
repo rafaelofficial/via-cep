@@ -16,11 +16,14 @@ public class Program {
 		
 		Scanner sc = new Scanner(System.in);
 
-		EnvioEmailService service = new EnvioEmailService();		
 		CepDao cepDao = DaoFactory.criaCepDao();
+		EnvioEmailService service = new EnvioEmailService();
+		
+		System.out.print("Informe um CEP válido: ");
+		String cep = sc.nextLine();
+		Cep novoCep = ViaCepClient.findCep(cep);
 				
 		System.out.println("--- Teste #1: Cep insert ---");
-		Cep novoCep = ViaCepClient.findCep("17013905");
 		cepDao.insert(novoCep);
 		System.out.println("\nInserido! Novo Cep: " + novoCep.getCep());
 	

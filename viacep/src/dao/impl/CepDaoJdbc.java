@@ -26,25 +26,14 @@ public class CepDaoJdbc implements CepDao {
 
 	@Override
 	public void insert(Cep obj) {
-
 		PreparedStatement statement = null;
 		
 		try {
-			
 			statement = conn.prepareStatement(
 					"INSERT INTO tb_cidade (Cep, Logradouro, Bairro, Localidade, Uf, Ibge, Gia, Ddd, siafi) \r\n"
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
-			// configurar os placeholder
-			statement.setString(1, obj.getCep());
-			statement.setString(2, obj.getLogradouro());
-			statement.setString(3, obj.getBairro());
-			statement.setString(4, obj.getLocalidade());
-			statement.setString(5, obj.getUf());
-			statement.setString(6, obj.getIbge());
-			statement.setString(7, obj.getGia());
-			statement.setString(8, obj.getDdd());
-			statement.setString(9, obj.getSiafi());
+			configuraPlaceholderInsert(obj, statement);
 			
 			int linhasAfetadas = statement.executeUpdate();
 			if (linhasAfetadas > 0) {
@@ -61,36 +50,32 @@ public class CepDaoJdbc implements CepDao {
 		} finally {
 			DB.closeStatement(statement);
 		}
-		
-		
+	}
+
+	// configurar os placeholder
+	private void configuraPlaceholderInsert(Cep obj, PreparedStatement statement) throws SQLException {
+		statement.setString(1, obj.getCep());
+		statement.setString(2, obj.getLogradouro());
+		statement.setString(3, obj.getBairro());
+		statement.setString(4, obj.getLocalidade());
+		statement.setString(5, obj.getUf());
+		statement.setString(6, obj.getIbge());
+		statement.setString(7, obj.getGia());
+		statement.setString(8, obj.getDdd());
+		statement.setString(9, obj.getSiafi());
 	}
 
 	@Override
 	public List<Cep> findAll() {
-		
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		
+		// preparar para a consulta sql e executa a query
 		try {
-			// preparar para a consulta sql
 			statement = conn.prepareStatement("SELECT * FROM tb_cidade");
-			// executa a query
 			resultSet = statement.executeQuery();
 			
-			List<Cep> list = new ArrayList<>();
-			Map<Integer, Cep> map = new HashMap<Integer, Cep>();
-			
-			// testa se veio algum resultado
-			while (resultSet.next()) {
-				Cep cep = map.get(resultSet.getInt("Id"));
-				
-				if (cep == null) {
-					cep = instaciarCep(resultSet);
-					map.put(resultSet.getInt("Id"), cep);
-				}
-				list.add(cep);
-			}	
-			return list;
+			return verificarResultadoDaQuery(resultSet);
 			
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
@@ -100,6 +85,23 @@ public class CepDaoJdbc implements CepDao {
 		}
 	}
 
+	// testa se veio algum resultado
+	private List<Cep> verificarResultadoDaQuery(ResultSet resultSet) throws SQLException {
+		List<Cep> list = new ArrayList<>();
+		Map<Integer, Cep> map = new HashMap<Integer, Cep>();
+
+		while (resultSet.next()) {
+			Cep cep = map.get(resultSet.getInt("Id"));
+			if (cep == null) {
+				cep = instaciarCep(resultSet);
+				map.put(resultSet.getInt("Id"), cep);
+			}
+			list.add(cep);
+		}	
+		return list;
+	}
+
+	// instancia CEP
 	private Cep instaciarCep(ResultSet resultSet) throws SQLException {
 		Cep cep = new Cep();
 		cep.setCep(resultSet.getString("Cep"));
@@ -112,6 +114,7 @@ public class CepDaoJdbc implements CepDao {
 		cep.setGia(resultSet.getString("Gia"));
 		cep.setDdd(resultSet.getString("Ddd"));
 		cep.setSiafi(resultSet.getString("siafi"));
+		
 		return cep;
 	}
 }
