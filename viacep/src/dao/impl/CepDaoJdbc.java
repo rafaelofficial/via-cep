@@ -35,20 +35,25 @@ public class CepDaoJdbc implements CepDao {
 			
 			configuraPlaceholderInsert(obj, statement);
 			
-			int linhasAfetadas = statement.executeUpdate();
-			if (linhasAfetadas > 0) {
-				ResultSet resultSet = statement.getGeneratedKeys();
-				if (resultSet.next()) {
-					int id = resultSet.getInt(1);
-					statement.setInt(linhasAfetadas, id);
-				}
-				DB.closeResultSet(resultSet);
-			}
+			totalDeLinhasAfetadas(statement);
 			
 		} catch (SQLException e) {
 			throw new DbException("Erro não esperado! Nenhuma linha afetada!");
 		} finally {
 			DB.closeStatement(statement);
+		}
+	}
+
+	// total de linha inseridas afetadas
+	private void totalDeLinhasAfetadas(PreparedStatement statement) throws SQLException {
+		int linhasAfetadas = statement.executeUpdate();
+		if (linhasAfetadas > 0) {
+			ResultSet resultSet = statement.getGeneratedKeys();
+			if (resultSet.next()) {
+				int id = resultSet.getInt(1);
+				statement.setInt(linhasAfetadas, id);
+			}
+			DB.closeResultSet(resultSet);
 		}
 	}
 
