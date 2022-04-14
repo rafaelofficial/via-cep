@@ -16,4 +16,4 @@
 
 # Próximos passos para a melhorias do projeto:
  - Alterar a base de dados de SQL para NoSQL: MongoDB; 
- - Adicionar Frontend: React.js.
+ - Adicionar Frontend: React.
