@@ -6,10 +6,14 @@
 <br />
 
 # Frameworks e Ferramentas:
- - Java & IDE: JDK11, Eclipse
- - Build Tools: Apache Maven
- - Database: MySQL
+ - Java & IDE: JDK11, Eclipse;
+ - Build Tools: Apache Maven;
+ - Database: MySQL.
 
 # Link de Referências:
- - [Via CEP](https://viacep.com.br/)
-- [ViaCEP API (Granmilk)](https://lnkd.in/dKAfjSAc)
+ - [Via CEP](https://viacep.com.br/);
+- [ViaCEP API (Granmilk)](https://lnkd.in/dKAfjSAc).
+
+# Próximos passos para a melhorias do projeto:
+ - Alterar a base de dados de SQL para NoSQL: MongoDB; 
+ - Adicionar Frontend: React.js.
