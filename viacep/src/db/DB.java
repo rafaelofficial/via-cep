@@ -34,9 +34,7 @@ public class DB {
 	 */
 	public static void closeConnection() {
 		try {
-			if (conn != null) {
-				conn.close();
-			}
+			if (conn != null) conn.close();
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		}
