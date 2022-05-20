@@ -2,7 +2,7 @@
 
  - ### Aplicação utilizando Java para consumir a API do Via CEP - Correios.
 
- - ### A ideia aqui é, buscar as informações de endereços na API, gravar esses dados numa tabela no banco de dados e enviar para um e-mail.
+ - ### A ideia aqui é, buscar as informações de endereços na API, gravar esses dados em uma tabela no banco de dados e enviar para um e-mail previamente configurado.
 <br />
 
 # Frameworks e Ferramentas:
