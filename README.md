@@ -13,6 +13,3 @@
 # Link de Referências:
  - [Via CEP](https://viacep.com.br/);
 - [ViaCEP API (Granmilk)](https://lnkd.in/dKAfjSAc).
-
-# Próximos passos para a melhorias do projeto:
- - Alterar a base de dados de SQL para NoSQL: MongoDB;
