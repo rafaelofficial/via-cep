@@ -15,6 +15,4 @@
 - [ViaCEP API (Granmilk)](https://lnkd.in/dKAfjSAc).
 
 # Próximos passos para a melhorias do projeto:
- - Alterar para projeto Spring Boot;
  - Alterar a base de dados de SQL para NoSQL: MongoDB;
- - Adicionar Frontend: React.
