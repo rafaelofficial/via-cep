@@ -12,7 +12,7 @@ public class EnvioEmailService {
 	private static Cep dadosEndereco = ViaCepClient.findCep("13382440");
 		
 	String email = "developmentjavafortests@gmail.com"; // configure seu email
-	String senha = "#Rafa123"; // configure sua senha
+	String senha = "*******"; // configure sua senha
 		
 	public void enviarEmail() {
 		
