@@ -2,7 +2,7 @@
 
  - ### Aplicação utilizando Java para consumir a API do Via CEP - Correios.
 
- - ### A ideia aqui é, buscar as informações de endereços na API, gravar esses dados numa tabela no banco de dados e enviar para um e-mail.
+ - ### A ideia aqui é, buscar as informações de endereços na API, gravar esses dados em uma tabela no banco de dados e enviar para um e-mail previamente configurado.
 <br />
 
 # Frameworks e Ferramentas:
@@ -13,8 +13,3 @@
 # Link de Referências:
  - [Via CEP](https://viacep.com.br/);
 - [ViaCEP API (Granmilk)](https://lnkd.in/dKAfjSAc).
-
-# Próximos passos para a melhorias do projeto:
- - Alterar para projeto Spring Boot;
- - Alterar a base de dados de SQL para NoSQL: MongoDB;
- - Adicionar Frontend: React.
